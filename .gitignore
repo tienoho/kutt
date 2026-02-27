@@ -14,3 +14,8 @@ docs/api/static
 **/.DS_Store
 db/*
 !db/.gitkeep
+server/i18n/index.js
+plans/vietnamese-implementation-plan.md
+plans/vietnamese-translation-plan.md
+plans/vietnamese-translation-full-report.md
+plans/analysis-report.md

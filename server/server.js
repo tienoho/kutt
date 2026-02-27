@@ -15,6 +15,7 @@ const locals = require("./handlers/locals.handler");
 const links = require("./handlers/links.handler");
 const routes = require("./routes");
 const utils = require("./utils");
+const i18n = require("./i18n");
 
 
 // run the cron jobs
@@ -56,6 +57,7 @@ app.use("/css", express.static("custom/css", { extensions: ["css"] }));
 app.use(express.static("static"));
 
 app.use(passport.initialize());
+app.use(i18n.i18nMiddleware);
 app.use(locals.isHTML);
 app.use(locals.config);
 
@@ -83,6 +85,16 @@ app.get("/:id", asyncHandler(links.redirect));
 
 // 404 pages that don't exist
 app.get("*", renders.notFound);
+
+// Language switcher route
+app.get("/language/:lng", (req, res) => {
+  const lng = req.params.lng;
+  if (lng === 'en' || lng === 'vi') {
+    i18n.setLocale(res, lng);
+  }
+  const referer = req.get('referer') || '/';
+  res.redirect(referer);
+});
 
 // handle errors coming from above routes
 app.use(helpers.error);

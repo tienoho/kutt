@@ -10,6 +10,7 @@ const utils = require("../utils");
 const redis = require("../redis");
 const mail = require("../mail");
 const env = require("../env");
+const i18n = require("../i18n");
 
 const CustomError = utils.CustomError;
 
@@ -22,7 +23,8 @@ function authenticate(type, error, isStrict, redirect) {
         (err || info instanceof Error) &&
         type === "oidc"
       ) {
-        return next(new CustomError("OIDC authentication failed.", 401));
+        const lng = res.locals.lng || 'en';
+        return next(new CustomError(i18n.t("errors.oidc_failed", {}, lng), 401));
       };
 
       if (err) return next(err);
@@ -50,12 +52,11 @@ function authenticate(type, error, isStrict, redirect) {
       }
 
       if (user && user.banned) {
-        throw new CustomError("You're banned from using this website.", 403);
+        throw new CustomError(i18n.t("errors.banned"), 403);
       }
 
       if (user && isStrict && !user.verified) {
-        throw new CustomError("Your email address is not verified. " +
-          "Sign up to get the verification link again.", 400);
+        throw new CustomError(i18n.t("errors.not_verified"), 400);
       }
 
       if (user) {
@@ -81,17 +82,17 @@ function authenticate(type, error, isStrict, redirect) {
   }
 }
 
-const local = authenticate("local", "Login credentials are wrong.", true, null);
-const jwt = authenticate("jwt", "Unauthorized.", true, "header");
-const jwtPage = authenticate("jwt", "Unauthorized.", true, "page");
-const jwtLoose = authenticate("jwt", "Unauthorized.", false, "header");
-const jwtLoosePage = authenticate("jwt", "Unauthorized.", false, "page");
-const apikey = authenticate("localapikey", "API key is not correct.", false, null);
-const oidc = authenticate("oidc", "Unauthorized", true, "page");
+const local = authenticate("local", i18n.t("errors.invalid_credentials"), true, null);
+const jwt = authenticate("jwt", i18n.t("errors.unauthorized"), true, "header");
+const jwtPage = authenticate("jwt", i18n.t("errors.unauthorized"), true, "page");
+const jwtLoose = authenticate("jwt", i18n.t("errors.unauthorized"), false, "header");
+const jwtLoosePage = authenticate("jwt", i18n.t("errors.unauthorized"), false, "page");
+const apikey = authenticate("localapikey", i18n.t("errors.apikey_not_correct"), false, null);
+const oidc = authenticate("oidc", i18n.t("errors.unauthorized"), true, "page");
 
 function admin(req, res, next) {
   if (req.user.admin) return next();
-  throw new CustomError("Unauthorized", 401);
+  throw new CustomError(i18n.t("errors.unauthorized"), 401);
 }
 
 async function signup(req, res) {
@@ -110,13 +111,13 @@ async function signup(req, res) {
     return;
   }
   
-  return res.status(201).send({ message: "A verification email has been sent." });
+  return res.status(201).send({ message: i18n.t("messages.verification_sent") });
 }
 
 async function createAdminUser(req, res) {
   const isThereAUser = await query.user.findAny();
   if (isThereAUser) {
-    throw new CustomError("Can not create the admin user because a user already exists.", 400);
+    throw new CustomError(i18n.t("errors.admin_exists"), 400);
   }
   
   const salt = await bcrypt.genSalt(12);
@@ -181,7 +182,7 @@ async function verify(req, res, next) {
 async function changePassword(req, res) {
   const isMatch = await bcrypt.compare(req.body.currentpassword, req.user.password);
   if (!isMatch) {
-    const message = "Current password is not correct.";
+    const message = i18n.t("errors.current_password_wrong");
     res.locals.errors = { currentpassword: message };
     throw new CustomError(message, 401);
   }
@@ -192,20 +193,20 @@ async function changePassword(req, res) {
   const user = await query.user.update({ id: req.user.id }, { password: newpassword });
   
   if (!user) {
-    throw new CustomError("Couldn't change the password. Try again later.");
+    throw new CustomError(i18n.t("errors.password_change_failed"));
   }
 
   if (req.isHTML) {
     res.setHeader("HX-Trigger-After-Swap", "resetChangePasswordForm");
     res.render("partials/settings/change_password", {
-      success: "Password has been changed."
+      success: i18n.t("messages.password_changed")
     });
     return;
   }
   
   return res
     .status(200)
-    .send({ message: "Your password has been changed successfully." });
+    .send({ message: i18n.t("messages.password_changed") });
 }
 
 async function generateApiKey(req, res) {
@@ -218,7 +219,7 @@ async function generateApiKey(req, res) {
   const user = await query.user.update({ id: req.user.id }, { apikey });
   
   if (!user) {
-    throw new CustomError("Couldn't generate API key. Please try again later.");
+    throw new CustomError(i18n.t("errors.apikey_failed"));
   }
 
   if (req.isHTML) {
@@ -248,13 +249,13 @@ async function resetPassword(req, res) {
 
   if (req.isHTML) {
     res.render("partials/reset_password/request_form", {
-      message: "If the email address exists, a reset password email will be sent to it."
+      message: i18n.t("messages.reset_sent")
     });
     return;
   }
   
   return res.status(200).send({
-    message: "If email address exists, a reset password email has been sent."
+    message: i18n.t("messages.reset_sent")
   });
 }
 
@@ -277,7 +278,7 @@ async function newPassword(req, res) {
   );
 
   if (!user) {
-    throw new CustomError("Could not set the password. Please try again later.");
+    throw new CustomError(i18n.t("errors.password_set_failed"));
   }
 
   res.render("partials/reset_password/new_password_success");
@@ -289,7 +290,7 @@ async function changeEmailRequest(req, res) {
   const isMatch = await bcrypt.compare(password, req.user.password);
   
   if (!isMatch) {
-    const error = "Password is not correct.";
+    const error = i18n.t("errors.current_password_wrong");
     res.locals.errors = { password: error };
     throw new CustomError(error, 401);
   }
@@ -297,7 +298,7 @@ async function changeEmailRequest(req, res) {
   const user = await query.user.find({ email });
   
   if (user) {
-    const error = "Can't use this email address.";
+    const error = i18n.t("errors.email_already_used");
     res.locals.errors = { email: error };
     throw new CustomError(error, 400);
   }
@@ -315,7 +316,7 @@ async function changeEmailRequest(req, res) {
     await mail.changeEmail({ ...updatedUser, email });
   }
 
-  const message = "A verification link has been sent to the requested email address."
+  const message = i18n.t("messages.change_email_sent")
   
   if (req.isHTML) {
     res.setHeader("HX-Trigger-After-Swap", "resetChangeEmailForm");
@@ -367,7 +368,7 @@ function featureAccess(features, redirect) {
         if (redirect) {
           return res.redirect("/");
         } else {
-          throw new CustomError("Request is not allowed.", 400);
+          throw new CustomError(i18n.t("errors.request_not_allowed"), 400);
         }
       } 
     }

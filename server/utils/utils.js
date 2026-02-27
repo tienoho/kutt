@@ -11,6 +11,7 @@ const { ROLES } = require("../consts");
 const knexUtils = require("./knex");
 const knex = require("../knex");
 const env = require("../env");
+const i18n = require("../i18n");
 
 const nanoid = customAlphabet(env.LINK_CUSTOM_ALPHABET, env.LINK_LENGTH);
 
@@ -376,6 +377,13 @@ function registerHandlebarsHelpers() {
       blocks[name] = [];
       return val;
   });
+  
+  // i18n helper - sử dụng language từ context hoặc mặc định
+  hbs.registerHelper("t", function(key, options) {
+    const lng = (options && options.data && options.data.root && options.data.root.lng) || 'en';
+    return i18n.t(key, { lng });
+  });
+  
   hbs.registerPartials(path.join(__dirname, "../views/partials"), function (err) {});
   const customPartialsPath = path.join(__dirname, "../../custom/views/partials");
   const customPartialsExist = fs.existsSync(customPartialsPath);
