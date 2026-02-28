@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{language}}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -16,12 +16,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="{{site_name}}" />
   <meta property="og:image" content="https://{{default_domain}}/images/card.png" />
-  <meta property="og:description" content="Free & Open Source Modern URL Shortener" />
+  <meta property="og:description" content="{{t "layout.og_description"}}" />
   <meta name="twitter:url" content="https://{{default_domain}}" />
   <meta name="twitter:title" content="{{site_name}}" />
-  <meta name="twitter:description" content="Free & Open Source Modern URL Shortener" />
+  <meta name="twitter:description" content="{{t "layout.og_description"}}" />
   <meta name="twitter:image" content="https://{{default_domain}}/images/card.png" />
-  <meta name="description" content="{{site_name}} is a free and open source URL shortener with custom domains and stats." />
+  <meta name="description" content="{{t "layout.meta_description" default=default_domain}}" />
   <title>{{site_name}} | {{title}}</title>
   <link rel="stylesheet" href="/css/styles.css">
   {{#each custom_styles}}

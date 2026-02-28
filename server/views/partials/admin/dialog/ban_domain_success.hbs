@@ -3,10 +3,9 @@
     {{> icons/check}}
   </div>
   <p>
-    The domain <b>"{{address}}"</b> is banned.
+    {{t "admin.domain_banned"}}
   </p>
   <div class="buttons">
-    <button type="button" hx-on:click="closeDialog()">Close</button>
+    <button type="button" hx-on:click="closeDialog()">{{t "common.close"}}</button>
   </div>
 </div>
-

@@ -1,16 +1,8 @@
-{{#unless links}}
-  {{#ifEquals links.length 0}}
-    <tr class="no-data">
-      <td>
-        No links.
-      </td>
-    </tr>
-  {{else}}
-    <tr class="loading-placeholder">
-      <td>
-        {{> icons/spinner}}
-        Loading links...
-      </td>
-    </tr>
-  {{/ifEquals}}
-{{/unless}}
+<tr class="loading">
+  <td colspan="6">
+    <div class="loading-wrapper">
+      <div class="spinner small"></div>
+      <p>{{t "common.loading"}}</p>
+    </div>
+  </td>
+</tr>

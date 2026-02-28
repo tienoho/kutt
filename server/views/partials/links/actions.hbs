@@ -1,18 +1,18 @@
 <td class="actions">
   {{#if password}}
-    <button class="action password" disabled="true" data-tooltip="Password protected">
+    <button class="action password" disabled="true" data-tooltip="{{t 'common.password_protected'}}">
       {{> icons/key}}
     </button>
   {{/if}}
   {{#if banned}}
-    <button class="action banned" disabled="true" data-tooltip="Banned">
+    <button class="action banned" disabled="true" data-tooltip="{{t 'common.banned'}}">
       {{> icons/stop}}
     </button>
   {{/if}}
   <a
     class="button action stats"
     href="/stats?id={{id}}"
-    title="Stats"
+    title="{{t 'links.view_stats'}}"
     class="action stats"
   >
     {{> icons/chart}}

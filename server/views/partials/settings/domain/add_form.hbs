@@ -10,7 +10,7 @@
 >
   <div class="inputs">
     <label class="{{#if errors.address}}error{{/if}}">
-      Address:
+      {{t "common.address"}}:
       <input 
         id="address" 
         name="address" 
@@ -23,11 +23,11 @@
       {{#if errors.address}}<p class="error">{{errors.address}}</p>{{/if}}
     </label>
     <label class="{{#if errors.homepage}}error{{/if}}">
-      Homepage (Optional):
+      {{t "common.homepage"}} ({{t "common.optional"}}):
       <input 
         id="homepage" 
         name="homepage" 
-        placeholder="Homepage URL" 
+        placeholder="{{t "settings.homepage_url"}}" 
         type="text" 
         hx-preserve="true" 
 
@@ -37,7 +37,7 @@
   </div>
   <p>
     <small>
-      If you leave homepage empty, <b>yoursite.com</b> will be redirected to <b>{{default_domain}}</b>.
+      {{t "settings.homepage_redirect_note" default=default_domain}}
     </small>
   </p>
   <div class="buttons-wrapper">
@@ -45,11 +45,11 @@
       document.querySelector('.show-domain-form').classList.remove('hidden');
       document.querySelector('#add-domain').remove();
     ">
-      Cancel
+      {{t "common.cancel"}}
     </button>
     <button type="submit" class="primary">
       <span>{{> icons/plus}}</span>
-      Add domain
+      {{t "settings.add_domain"}}
     </button>
   </div>
   {{> icons/spinner}}

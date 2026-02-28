@@ -1,11 +1,11 @@
 <div class="content">
-  <h2>Delete user?</h2>
+  <h2>{{t "admin.delete_user"}}</h2>
   <p>
-    Are you sure do you want to delete the user &quot;<b>{{email}}</b>&quot;?<br/>
-    <b>All their data including their links</b> will be deleted.
+    {{t "admin.delete_user_confirm"}}<br/>
+    <b>{{t "admin.all_data_will_be_deleted"}}</b>
   </p>
   <div class="buttons">
-    <button type="button" hx-on:click="closeDialog()">Cancel</button>
+    <button type="button" hx-on:click="closeDialog()">{{t "common.cancel"}}</button>
     <button 
       type="button"
       class="danger confirm" 
@@ -18,7 +18,7 @@
       hx-select-oob="#dialog-error"
     >
       <span>{{> icons/trash}}</span>
-      Delete
+      {{t "common.delete"}}
     </button>
     {{> icons/spinner}}
   </div>
