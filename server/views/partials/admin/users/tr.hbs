@@ -7,8 +7,8 @@
     <p class="description">
       {{#if domains}}
         <a
-          aria-label="View domains" 
-          data-tooltip="View domains" 
+          aria-label="{{t "admin.view_domains"}}" 
+          data-tooltip="{{t "admin.view_domains"}}" 
           hx-get="/api/domains/admin"
           hx-target="closest table"
           hx-swap="outerHTML" 
@@ -20,7 +20,7 @@
           {{domains}}
         </a>
       {{else}}
-        <span>No domains</span>
+        <span>{{t "admin.no_domains_row"}}</span>
       {{/if}}
     </p>
   </td>
@@ -29,16 +29,16 @@
   </td>
   <td class="users-verified">
     {{#if verified}}
-      <span class="status green">VERIFIED</span>
+      <span class="status green">{{t "common.verified"}}</span>
     {{else}}
-      <span class="status gray">NOT VERIFIED</span>
+      <span class="status gray">{{t "common.not_verified"}}</span>
     {{/if}}
   </td>
   <td class="users-role">
     {{#ifEquals role "ADMIN"}}
-    <span class="status red">ADMIN</span>
+    <span class="status red">{{t "common.admin_role"}}</span>
     {{else}}
-    <span class="status gray">USER</span>
+    <span class="status gray">{{t "common.user_role"}}</span>
     {{/ifEquals}}
   </td>
   <td class="users-links-count">
@@ -46,8 +46,8 @@
       {{links_count}}
     {{else}}
       <a
-        data-tooltip="View links"
-        aria-label="View links"
+        data-tooltip="{{t "admin.view_links"}}"
+        aria-label="{{t "admin.view_links"}}"
         hx-get="/api/links/admin"
         hx-target="closest table"
         hx-swap="outerHTML" 

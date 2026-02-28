@@ -3,13 +3,13 @@
     {{t "auth.create_admin_first"}}:
   </h2>
   <label class="{{#if errors.email}}error{{/if}}">
-    {{t "auth.email_address"}}:
+    {{t "common.email_address"}}:
     <input
       name="email"
       id="email"
       type="email"
       autofocus="true"
-      placeholder="{{t "auth.email_address"}}..."
+      placeholder="{{t "common.email_address"}}..."
       hx-preserve="true"
     />
     {{#if errors.email}}<p class="error">{{errors.email}}</p>{{/if}}

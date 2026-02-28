@@ -11,12 +11,12 @@
   {{else}}
     <div class="inputs-wrapper">
       <label>
-        Password:
+        {{t "common.password"}}:
         <input 
           type="password" 
           id="protected-link-password" 
           name="password" 
-          placeholder="Password..."
+          placeholder="{{t 'common.password_placeholder'}}"
           hx-preserve="true"
           class="{{#if errors.link}}error{{/if}}"
           required 
@@ -25,7 +25,7 @@
       <button type="submit" class="primary">
         <span>{{> icons/spinner}}</span>
         <span>{{> icons/key}}</span>
-        Unlock & Go
+        {{t "links.unlock_go"}}
       </button>
     </div>
     {{#if error}}<p class="error">{{error}}</p>{{/if}}

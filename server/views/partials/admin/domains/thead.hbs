@@ -8,7 +8,7 @@
             id="search" 
             name="search" 
             type="text" 
-            placeholder="Search domain..." 
+            placeholder="{{t 'admin.search_domain_placeholder'}}" 
             class="table-input search admin" 
             hx-on:input="onSearchChange(event)" 
             hx-on:keyup="resetTableNav()"
@@ -16,7 +16,7 @@
           />
           <button 
             type="button" 
-            aria-label="Clear search" 
+            aria-label="{{t 'admin.clear_search'}}" 
             class="clear" 
             onclick="clearSeachInput(event)"
           >
@@ -28,7 +28,7 @@
             id="search_user" 
             name="user" 
             type="text" 
-            placeholder="Search user..." 
+            placeholder="{{t 'admin.search_user_placeholder'}}" 
             class="table-input search admin" 
             hx-on:input="onSearchChange(event)" 
             hx-on:keyup="resetTableNav()"
@@ -36,7 +36,7 @@
           />
           <button 
             type="button" 
-            aria-label="Clear user" 
+            aria-label="{{t 'admin.clear_user_search'}}" 
             class="clear" 
             onclick="clearSeachInput(event)"
           >
@@ -44,21 +44,21 @@
           </button>
         </div>
         <select id="domains-select-banned" name="banned" class="table-input ban" hx-on:change="resetTableNav()">
-          <option value="" selected>Banned...</option>
-          <option value="true">Banned</option>
-          <option value="false">Not banned</option>
+          <option value="" selected>{{t 'admin.search_banned'}}</option>
+          <option value="true">{{t 'common.banned'}}</option>
+          <option value="false">{{t 'common.not_banned'}}</option>
         </select>
       </div>
       <div>
         <select id="domains-select-links" name="links" class="table-input links" hx-on:change="resetTableNav()">
-          <option value="" selected>Links...</option>
-          <option value="true" {{#ifEquals query.links 'true'}}selected{{/ifEquals}}>With links</option>
-          <option value="false" {{#ifEquals query.links 'true'}}selected{{/ifEquals}}>No links</option>
+          <option value="" selected>{{t 'admin.search_links'}}</option>
+          <option value="true" {{#ifEquals query.links 'true'}}selected{{/ifEquals}}>{{t 'admin.with_links'}}</option>
+          <option value="false" {{#ifEquals query.links 'true'}}selected{{/ifEquals}}>{{t 'admin.no_links'}}</option>
         </select>
         <select id="domains-select-owner" name="owner" class="table-input owner" hx-on:change="resetTableNav()">
-          <option value="" selected>Owner...</option>
-          <option value="true" {{#ifEquals query.owner 'true'}}selected{{/ifEquals}}>With owner</option>
-          <option value="false" {{#ifEquals query.owner 'true'}}selected{{/ifEquals}}>No owner</option>
+          <option value="" selected>{{t 'admin.owner_select'}}</option>
+          <option value="true" {{#ifEquals query.owner 'true'}}selected{{/ifEquals}}>{{t 'admin.with_owner'}}</option>
+          <option value="false" {{#ifEquals query.owner 'true'}}selected{{/ifEquals}}>{{t 'admin.no_owner'}}</option>
         </select>
         <input id="total" name="total" type="hidden" value="{{total}}" />
         <input id="limit" name="limit" type="hidden" value="10" />
@@ -71,18 +71,18 @@
           hx-indicator="#admin-table-dialog"
         >
           <span>{{> icons/plus}}</span>
-          Add domain
+          {{t 'admin.add_domain'}}
         </button>
       </div>
     </th>
     {{> admin/table_nav}}
   </tr>
   <tr>
-    <th class="domains-id">ID</th>
-    <th class="domains-address">Address</th>
-    <th class="domains-homepage">Homepage</th>
-    <th class="domains-created-at">Created at</th>
-    <th class="domains-links-count">Total links</th>
+    <th class="domains-id">{{t 'admin.column_id'}}</th>
+    <th class="domains-address">{{t 'admin.column_address'}}</th>
+    <th class="domains-homepage">{{t 'admin.column_homepage'}}</th>
+    <th class="domains-created-at">{{t 'admin.column_created_at'}}</th>
+    <th class="domains-links-count">{{t 'admin.column_total_links'}}</th>
     <th class="domains-actions"></th>
   </tr>
 </thead>

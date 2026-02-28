@@ -5,11 +5,11 @@
   <td class="domains-address right-fade">
     {{address}}
     <p class="description">
-      by&nbsp;
+      {{t "admin.by"}}
       {{~#if user_id~}}
         <a 
-          aria-label="View user" 
-          data-tooltip="View user" 
+          aria-label="{{t "admin.view_user"}}" 
+          data-tooltip="{{t "admin.view_user"}}" 
           hx-get="/api/users/admin"
           hx-target="closest table"
           hx-swap="outerHTML" 
@@ -24,8 +24,8 @@
         {{else}}
           &nbsp;(
           <a 
-            aria-label="View domains" 
-            data-tooltip="View domains" 
+            aria-label="{{t "admin.view_domains"}}" 
+            data-tooltip="{{t "admin.view_domains"}}" 
             hx-get="/api/domains/admin"
             hx-target="closest table"
             hx-swap="outerHTML" 
@@ -33,13 +33,13 @@
             hx-indicator="closest table"
             hx-vals='{"user":"{{email}}"}'
           >
-            view domains
+            {{t "admin.view_domains"}}
           </a>)
         {{/ifEquals}}
       {{~else~}}
         <a 
-          aria-label="View system domains" 
-          data-tooltip="View system domains" 
+          aria-label="{{t "admin.view_system_domains"}}" 
+          data-tooltip="{{t "admin.view_system_domains"}}" 
           hx-get="/api/domains/admin"
           hx-target="closest table"
           hx-swap="outerHTML" 
@@ -47,7 +47,7 @@
           hx-indicator="closest table"
           hx-vals='{"owner":"false"}'
         >
-          System
+          {{t "admin.system_domain"}}
         </a>
       {{~/if~}}
       &nbsp;{{~#if description~}}· {{description}}{{~/if}}
@@ -59,7 +59,7 @@
         {{homepage}}
       </a>
     {{else}}
-      No homepage
+      {{t "common.no_homepage"}}
     {{/if}}
   </td>
   <td class="domains-created-at">
@@ -70,8 +70,8 @@
       {{links_count}}
     {{else}}
       <a
-        data-tooltip="View links"
-        aria-label="View links"
+        data-tooltip="{{t "admin.view_links"}}"
+        aria-label="{{t "admin.view_links"}}"
         hx-get="/api/links/admin"
         hx-target="closest table"
         hx-swap="outerHTML" 

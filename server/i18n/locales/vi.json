@@ -16,6 +16,7 @@
     "delete": "Xóa",
     "edit": "Sửa",
     "copy": "Sao chép",
+    "copy_link": "Sao chép liên kết",
     "search": "Tìm kiếm...",
     "search_placeholder": "Tìm kiếm...",
     "clear": "Xóa",
@@ -38,6 +39,10 @@
     "homepage": "Trang chủ",
     "github": "GitHub",
     "report": "Báo cáo",
+    "report_url_label": "URL chứa malware/lừa đảo:",
+    "send_report": "Gửi báo cáo",
+    "show_email": "hiển thị địa chỉ email",
+    "contact_us": "Liên hệ chúng tôi",
     "close": "Đóng",
     "update": "Cập nhật",
     "add": "Thêm",
@@ -69,14 +74,15 @@
     "expires_in": "Hết hạn sau",
     "qr_code": "Mã QR",
     "optional": "Tùy chọn",
-    "password_placeholder": "Mật khẩu...",
-    "view_stats": "Xem thống kê"
+    "view_stats": "Xem thống kê",
+      "world_map": "Bản đồ thế giới"
   },
   "footer": {
     "powered_by": "Cung cấp bởi",
     "terms_of_service": "Điều khoản dịch vụ",
     "report_abuse": "Báo cáo lạm dụng",
-    "contact_us": "Liên hệ chúng tôi"
+    "contact_us": "Liên hệ chúng tôi",
+    "github": "GitHub"
   },
   "auth": {
     "login_title": "Đăng nhập hoặc đăng ký",
@@ -124,8 +130,7 @@
     "ban_success": "Liên kết bị cấm.",
     "no_link_found": "Không tìm thấy liên kết.",
     "target_url": "URL đích",
-    "unlock_go": "Mở khóa & Đi",
-    "view_stats": "Xem thống kê"
+    "unlock_go": "Mở khóa & Đi"
   },
   "admin": {
     "links": "Liên kết",
@@ -160,11 +165,11 @@
     "search_owner": "Chủ sở hữu...",
     "search_links": "Liên kết...",
     "with_domains": "Có tên miền",
-    "no_domains": "Không có tên miền",
+    "no_domains": "Không có tên miền nào.",
     "with_owner": "Có chủ sở hữu",
     "no_owner": "Không có chủ sở hữu",
     "with_links": "Có liên kết",
-    "no_links": "Không có liên kết",
+    "no_links": "Không có liên kết nào.",
     "verification": "Xác minh",
     "search_user_placeholder": "Tìm người dùng...",
     "search_domain_placeholder": "Tìm tên miền...",
@@ -177,7 +182,33 @@
     "domain_created": "Tên miền \"{{address}}\" đã được tạo thành công.",
     "domain_deleted": "Tên miền \"{{address}}\" đã được xóa.",
     "domain_banned": "Tên miền \"{{address}}\" bị cấm.",
-    "all_data_will_be_deleted": "Tất cả dữ liệu bao gồm liên kết của họ sẽ bị xóa."
+    "all_data_will_be_deleted": "Tất cả dữ liệu bao gồm liên kết của họ sẽ bị xóa.",
+    "loading_users": "Đang tải người dùng...",
+    "loading_domains": "Đang tải tên miền...",
+    "loading_links": "Đang tải liên kết...",
+    "no_users": "Không có người dùng nào.",
+    "no_domains_row": "Không có tên miền",
+    "view_links": "Xem liên kết",
+    "view_user": "Xem người dùng",
+    "view_anonymous_links": "Xem liên kết ẩn danh",
+    "view_links_by_domain": "Xem liên kết theo tên miền này",
+    "view_links_by_user": "Xem liên kết của ngườì dùng này",
+    "view_system_domains": "Xem tên miền hệ thống",
+    "by": "bởi ",
+    "system_domain": "Hệ thống",
+    "password_protected": "Bảo vệ bằng mật khẩu",
+    "banned": "Bị cấm",
+    "stats": "Thống kê",
+    "target": "Đích:",
+    "target_placeholder": "Đích...",
+    "custom_url": "URL tùy chỉnh...",
+    "description": "Mô tả:",
+    "description_placeholder": "Mô tả...",
+    "expire_in_label": "Hết hạn sau:",
+    "expire_placeholder": "2 phút/giờ/ngày",
+    "close": "Đóng",
+    "update": "Cập nhật",
+    "no_link_found": "Không tìm thấy liên kết."
   },
   "errors": {
     "banned": "Bạn đã bị cấm sử dụng trang web này.",
@@ -299,6 +330,7 @@
     "meta_description": "{{site_name}} là trình rút gọn URL miễn phí và nguồn mở với tên miền tùy chỉnh và thống kê."
   },
   "pages": {
+    "404": "404",
     "banned_title": "Liên kết đã bị cấm và xóa vì malware hoặc lừa đảo.",
     "banned_report": "Nếu bạn phát hiện liên kết malware/lừa đảo được rút gọn bởi {{domain}}, hãy gửi báo cáo cho chúng tôi.",
     "send_report": "gửi báo cáo cho chúng tôi",
@@ -336,7 +368,6 @@
     "new_email": "Địa chỉ email mới:",
     "api_key_generated": "API key đã được tạo.",
     "error": "Lỗi!",
-    "404": "404",
     "link_not_found": "Không tìm thấy liên kết.",
     "back_to_homepage": "Trở về trang chủ",
     "protected_link": "Liên kết được bảo vệ.",

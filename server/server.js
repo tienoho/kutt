@@ -57,12 +57,27 @@ app.use("/css", express.static("custom/css", { extensions: ["css"] }));
 app.use(express.static("static"));
 
 app.use(passport.initialize());
+
+// ============================================
+// i18n MIDDLEWARE - Global Language Support
+// ============================================
+// Đặt trước tất cả routes để đảm bảo locale có sẵn cho mọi request
 app.use(i18n.i18nMiddleware);
+
+// Language switcher route - Đặt sớm để xử lý trước
+app.get("/language/:lng", (req, res) => {
+  const lng = req.params.lng;
+  if (lng === 'en' || lng === 'vi') {
+    i18n.setLocale(res, lng);
+  }
+  const referer = req.get('referer') || '/';
+  res.redirect(referer);
+});
+
 app.use(locals.isHTML);
 app.use(locals.config);
 
 // template engine / serve html
-
 app.set("view engine", "hbs");
 app.set("views", [
   path.join(__dirname, "../custom/views"),
@@ -73,10 +88,13 @@ utils.registerHandlebarsHelpers();
 // if is custom domain, redirect to the set homepage
 app.use(asyncHandler(links.redirectCustomDomainHomepage));
 
-// render html pages
+// ============================================
+// ROUTES
+// ============================================
+// Render routes (HTML pages) - đã có localeMiddleware trong routes.js
 app.use("/", routes.render);
 
-// handle api requests
+// API routes - đã có i18n.i18nMiddleware trong routes.js
 app.use("/api/v2", routes.api);
 app.use("/api", routes.api);
 
@@ -85,16 +103,6 @@ app.get("/:id", asyncHandler(links.redirect));
 
 // 404 pages that don't exist
 app.get("*", renders.notFound);
-
-// Language switcher route
-app.get("/language/:lng", (req, res) => {
-  const lng = req.params.lng;
-  if (lng === 'en' || lng === 'vi') {
-    i18n.setLocale(res, lng);
-  }
-  const referer = req.get('referer') || '/';
-  res.redirect(referer);
-});
 
 // handle errors coming from above routes
 app.use(helpers.error);

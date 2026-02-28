@@ -381,7 +381,7 @@ function registerHandlebarsHelpers() {
   // i18n helper - sử dụng language từ context hoặc mặc định
   hbs.registerHelper("t", function(key, options) {
     const lng = (options && options.data && options.data.root && options.data.root.lng) || 'en';
-    return i18n.t(key, { lng });
+    return i18n.t(key, options && options.hash ? options.hash : {}, lng);
   });
   
   hbs.registerPartials(path.join(__dirname, "../views/partials"), function (err) {});
